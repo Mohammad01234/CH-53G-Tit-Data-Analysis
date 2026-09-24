@@ -309,7 +309,7 @@ means at least one of `Hovern OGE` / `90 Knoten` / `110 Knoten` / `130 Knoten` i
 | `getFieldOrEmpty.m` | Returns `s.(fieldName)` if it exists, else `[]` — avoids "structure has no member" errors on inconsistent struct arrays. |
 | `normalizeFlights.m` | Forces `Flights` into a consistent struct array: handles the cell-array case, fills in any struct's missing fields (union of all fields seen), and guarantees the 5 required fields always exist. |
 | `normalizeBalanceData.m` / `normalizeTrackData.m` | Same normalization pattern, applied to `BalanceData` / `TrackData`. |
-| `toItems.m` *(see below — not yet in repo)* | Converts any of the above into a plain cell array for element-by-element iteration without requiring matching struct fields (used where concatenation is not needed, only iteration). |
+| `toItems.m` | Converts any of the above into a plain cell array for element-by-element iteration without requiring matching struct fields (used where concatenation is not needed, only iteration). |
 | `alignStructFields.m` | Makes two struct arrays share an identical field set/order so they can be safely concatenated with `[a; b]`. |
 | `findAircraftIdx.m` | Returns the index (or indices) into `data.Aircraft` matching a given `TailNumber`. |
 | `findTestIdxByDate.m` | Returns the index (or indices) into a `Tests` array matching a given `Started`/`Ended` date prefix. |
@@ -321,48 +321,7 @@ means at least one of `Hovern OGE` / `90 Knoten` / `110 Knoten` / `130 Knoten` i
 | `getCurrentSettingsMap.m` | Returns a flight's actual physical settings as a flattened map, merging all of that flight's `CurrentSettings` entries oldest-to-newest so a later partial update doesn't erase untouched points. |
 | `getRecommendedSettingsMap.m` | Returns a flight's `SolveResults` recommendation (latest entry by `Created`) as a flattened map. |
 | `collectHarmonicAmplitudes.m` | Extracts the FFT amplitude at a target harmonic order and `TestCondition`, per channel, from a set of flights (see FFT section above for the derivation method). |
-| `ternary.m` *(see below — not yet in repo)* | Simple `if/else`-as-expression helper. |
-
----
-
-## Missing Helpers to Add
-
-Two helper functions are referenced throughout the codebase (`toItems` in
-`fftdataavg.m`/`collectHarmonicAmplitudes.m`, and `ternary` in
-`checkFlightCompliance.m`) but were not included in this upload batch. Add them as their
-own `.m` files:
-
-**`toItems.m`:**
-```matlab
-function items = toItems(x)
-    % Returns a cell array of individual elements, regardless of whether x
-    % is a cell array, a struct array, a scalar struct, or empty.
-    % Unlike [x{:}], this never requires matching fields, since it doesn't
-    % concatenate anything -- just wraps each element for safe iteration.
-    if isempty(x)
-        items = {};
-    elseif iscell(x)
-        items = x;
-    else
-        n = numel(x);
-        items = cell(n, 1);
-        for idx = 1:n
-            items{idx} = x(idx);
-        end
-    end
-end
-```
-
-**`ternary.m`:**
-```matlab
-function out = ternary(cond, a, b)
-    if cond
-        out = a;
-    else
-        out = b;
-    end
-end
-```
+| `ternary.m` | Simple `if/else`-as-expression helper. |
 
 ---
 
