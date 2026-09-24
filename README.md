@@ -356,13 +356,10 @@ means at least one of `Hovern OGE` / `90 Knoten` / `110 Knoten` / `130 Knoten` i
 
 ## Recommended Next Steps
 
-1. Add the `84+97` exact-duplicate fix to `step1.m` (before Step 3a) and re-run a full
-   tail-number-duplicate sweep to confirm no others remain.
-2. Add `toItems.m` and `ternary.m` to the repository (see above).
-3. Manually audit the "unresolved non-compliant tests" list from Step 6's output.
-4. Validate `checkSettingsChanged.m` against any available known-good repair records.
-5. Decide the final disposition of `data.AndreasSeparatedTests`.
-6. Re-run Step 6 with the gap threshold varied (e.g. 30/45/60 days) to test sensitivity.
-7. If moving to the full production file, benchmark load time/memory before assuming
+1. Manually audit the "unresolved non-compliant tests" list from Step 6's output.
+2. Validate `checkSettingsChanged.m` against any available known-good repair records.
+3. Decide the final disposition of `data.AndreasSeparatedTests`.
+4. Re-run Step 6 with the gap threshold varied (e.g. 30/45/60 days) to test sensitivity.
+5. If moving to the full production file, benchmark load time/memory before assuming
    `step1.m` will run as-is; consider a pre-processing step to strip `FftData` if not
    needed for a given run.
