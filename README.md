@@ -20,9 +20,8 @@ analysis of the cleaned data.
 8. [FFT Averaging & Comparison (`fftdataavg.m`)](#fft-averaging--comparison-fftdataavgm)
 9. [Histogram Visualization (`Histogramm.m`)](#histogram-visualization-histogrammm)
 10. [Helper Function Reference](#helper-function-reference)
-11. [Missing Helpers to Add](#missing-helpers-to-add)
-12. [Known Limitations & Assumptions](#known-limitations--assumptions)
-13. [Recommended Next Steps](#recommended-next-steps)
+11. [Known Limitations & Assumptions](#known-limitations--assumptions)
+12. [Recommended Next Steps](#recommended-next-steps)
 
 ---
 
@@ -110,7 +109,7 @@ helpers exist specifically to make this safe to iterate over.
 
 ## Quick Start
 
-```matlab
+```Octave / Matlab
 % 1. Explore the raw file structure first (optional but recommended)
 readingjsonfile
 
@@ -332,10 +331,6 @@ means at least one of `Hovern OGE` / `90 Knoten` / `110 Knoten` / `130 Knoten` i
   self-consistency under testing. Spot-check a handful of resolved merges before treating
   the output as final.
 - **The 45-day gap threshold is a judgment call**, not derived from documented policy.
-- **A second exact-duplicate tail number case (`84+97`) was found after `step1.m` was
-  already built** and is not yet reflected in the uploaded script — the same `3a-pre`-style
-  fix used for `85+01` needs to be added for `84+97` (and a full sweep run afterward to
-  confirm no further exact duplicates remain) before the export is trusted as final.
 - **Unresolved non-compliant tests are intentionally left unmerged** — `step1.m`'s console
   output includes a full list of these; treat it as a manual-review queue, not a final
   determination.
